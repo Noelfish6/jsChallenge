@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Taiwanese Opera</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">Coconut fiddle</span>
+      <span class="sound">殼仔弦</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">Suona horn</span>
+      <span class="sound">嗩吶</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">Flute 笛</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">Small gong 小鑼</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">Tang gong 堂鼓</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">Board 板</span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">Clapper 磕仔</span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">Chao 鈔</span>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">Iron choard 鼓吹弦</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="sounds/1Coconutfiddle.wav"></audio>
+  <audio data-key="83" src="sounds/2Suonahorn.wav"></audio>
+  <audio data-key="68" src="sounds/3Flute.wav"></audio>
+  <audio data-key="70" src="sounds/4Smallgong.wav"></audio>
+  <audio data-key="71" src="sounds/5Tanggong.wav"></audio>
+  <audio data-key="72" src="sounds/6Board.wav"></audio>
+  <audio data-key="74" src="sounds/7Clapper.wav"></audio>
+  <audio data-key="75" src="sounds/8Chao.wav"></audio>
+  <audio data-key="76" src="sounds/9Ironchord.wav"></audio>
+
+<script>
+
+
+function playSound(e) {
+    const audio = document.querySelector(`audio[data-key = "${e.keyCode}"]`);
+  const key = document.querySelector(`.key[data-key = "${e.keyCode}"]`);
+  if(!audio) return;
+  audio.currentTime = 0;
+  audio.play();
+  key.classList.add('playing');
+
+function removeTransition(e){
+  if(e.propertyName !== 'transform') return;
+  this.classList.remove('playing');
+}
+
+  const keys = document.querySelectorAll('.key');
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+};
+
+window.addEventListener('keydown', playSound);
+
+</script>
+
+
+</body>
+</html>
