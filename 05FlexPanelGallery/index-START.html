@@ -44,7 +44,7 @@
       background-position:center;
       flex:1;
       justify-content: center;
-      align-items: center;
+
       display: flex;
       flex-direction: column;
     }
@@ -133,8 +133,9 @@
     this.classList.toggle('open');
   }
 
-  function toggleActive(){
-    if(e.propertyName.incluses('flex')){
+  function toggleActive(e){
+    console.log(e.propertyName);
+    if(e.propertyName.includes('flex')){
       this.classList.toggle('open-active');
     }
   }
