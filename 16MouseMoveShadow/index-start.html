@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mouse Shadow</title>
+</head>
+<body>
+
+  <div class="hero">
+    <h1 contenteditable>😆Day 16 done!😆</h1>
+  </div>
+
+  <style>
+  html {
+    color:black;
+    font-family: sans-serif;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color:black;
+  }
+
+  h1 {
+    text-shadow: 10px 10px 0 rgba(71,0,49, 0.8);
+    font-size: 100px;
+  }
+  </style>
+
+<script>
+
+  const hero = document.querySelector('.hero');
+  const text = hero.querySelector('h1');
+  const walk = 100; //100px
+
+
+  function shadow(e){
+    const {offsetWidth:width, offsetHeight:height} = hero;
+    let {offsetX:x, offsetY:y} = e;
+
+  // console.log(x,y);
+  // x,y are effected by child element, so we need normalization
+
+  // console.log(this, e.target);
+  // show what is this, e.target
+  if(this !== e.target){
+    x = x + e.target.offsetLeft;
+    y = y + e.target.offsetTop;
+
+  }
+
+  const xWalk = Math.round((x/width*walk) - (walk/2));
+  const yWalk = Math.round((y/height*walk) - (walk/2));
+
+  // console.log(xWalk,yWalk);
+
+  text.style.textShadow = `
+  ${xWalk}px ${yWalk}px 0 rgba(255,152,152, 0.8),
+  ${xWalk * -1}px ${yWalk}px 0 rgba(207,69,92, 0.8),
+  ${yWalk}px ${xWalk * -1}px 0 rgba(151,21,73, 0.8),
+  ${yWalk * -1}px ${xWalk}px 0 rgba(71,0,49, 0.8)
+
+  `;
+
+  } 
+
+  hero.addEventListener('mousemove', shadow)
+</script>
+</body>
+</html>
